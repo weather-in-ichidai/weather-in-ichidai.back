@@ -15,7 +15,8 @@ COPY --from=builder /usr/local/bin/uwsgi /usr/local/bin/uwsgi
 RUN apt update \
   && apt install -y libpq5 libxml2 \
   && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
+  && rm -rf /var/lib/apt/lists/* \
+  && apt-get install -y cron
 
 RUN useradd -r -s /bin/false uwsgiusr
 RUN mkdir -p /opt/app/src/logs/app_logs

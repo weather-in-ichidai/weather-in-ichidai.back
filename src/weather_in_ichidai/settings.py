@@ -38,7 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'weather',
+    'django_crontab',
     'rest_framework',
+]
+
+# CRON
+CRONJOBS = [
+    ('0,30 * * * *', 'weather.cron.get_weather_from_POTEKA')
 ]
 
 MIDDLEWARE = [
