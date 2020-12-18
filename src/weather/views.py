@@ -8,5 +8,5 @@ class WeatherViewSet(
                    mixins.RetrieveModelMixin, 
                    mixins.ListModelMixin,
                    viewsets.GenericViewSet):
-    queryset = Weather_data.objects.all()
+    queryset = Weather_data.objects.all().latest("date_time")
     serializer_class = WeatherSerializer
