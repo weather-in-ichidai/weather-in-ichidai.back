@@ -9,9 +9,12 @@ class WeatherSerializer(serializers.ModelSerializer):
     rainfallRate = serializers.IntegerField(source = "pop")
     weatherType = serializers.CharField(source = "weather")
     temperature = serializers.CharField(source = "temp")
+
+    description = serializers.SerializerMethodField()
+
     class Meta:
         model = Weather_data
-        fields = ('date_time','weatherType','rainfallRate',"temperature","minTemp","maxTemp","clothing",'now_rain')
+        fields = ('date_time','weatherType','rainfallRate',"temperature","minTemp","maxTemp","clothing",'description')
     
     def get_minTemp(self,instance):
         minTemp = min(instance.temp.split(","))
@@ -37,4 +40,10 @@ class WeatherSerializer(serializers.ModelSerializer):
             return "warm"
         return "superWarm"
         
-        
+    def get_description(self,instance):
+        res_text = ""
+        if(instance.now_rain == 0):
+            res_text = "現在雨は降っていません"
+        else:
+            res_text = "現在雨が降っています"
+        return res_text

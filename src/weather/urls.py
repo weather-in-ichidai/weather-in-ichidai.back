@@ -3,4 +3,4 @@ from .views import WeatherViewSet
 
 
 router = routers.DefaultRouter()
-router.register(r'api',WeatherViewSet)
+router.register('weather',WeatherViewSet,basename="api")

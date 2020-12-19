@@ -21,5 +21,5 @@ from weather.urls import router as weather_router
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     # blog.urlsをincludeする
-    url(r'^weather/', include(weather_router.urls)),
+    url(r'^api/', include(weather_router.urls)),
 ]
