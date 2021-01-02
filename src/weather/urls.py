@@ -1,6 +1,7 @@
-from rest_framework import routers
 from .views import WeatherViewSet
+from django.conf.urls import url, include
+from django.urls import path
 
-
-router = routers.DefaultRouter()
-router.register('weather',WeatherViewSet,basename="api")
+urlpatterns = [
+    url(r"^weather",WeatherViewSet.as_view())
+]

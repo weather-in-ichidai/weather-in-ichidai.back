@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Weather_data
+from .models import Weather_data,Past_weather_data
 
 class WeatherSerializer(serializers.ModelSerializer):
     minTemp = serializers.SerializerMethodField()
@@ -47,3 +47,12 @@ class WeatherSerializer(serializers.ModelSerializer):
         else:
             res_text = "現在雨が降っています"
         return res_text
+
+
+
+class PastWeatherSerializer(serializers.ModelSerializer):
+    weatherType = serializers.CharField(source = "weather")
+    temperature = serializers.CharField(source = "temp")
+    class Meta:
+        model = Past_weather_data
+        fields = ('date','weatherType','humi',"temperature")
