@@ -1,1 +1,1 @@
-web: gunicorn config.wsgi --log-file -
+web: gunicorn weather_in_ichidai.wsgi --log-file -
