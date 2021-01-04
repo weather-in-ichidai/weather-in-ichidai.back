@@ -4,6 +4,7 @@ whitenoise
 gunicorn
 django_heroku
 requests
+django-cors-headers
 Django==3.1.4
 django-crontab==0.7.1
 django-filter==2.4.0
