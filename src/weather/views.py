@@ -11,8 +11,10 @@ import datetime
 
 class WeatherViewSet(APIView):
     def get(self,request):
-        req_date_str = self.request.query_params["date"]
-        req_date_t = datetime.datetime.strptime(self.request.query_params["date"],"%Y-%m-%d")
+        req_date_str = self.request.query_params.get("date")
+        if req_date_str is None:
+            req_date_str = datetime.datetime.now().strftime("%Y-%m-%d")
+        req_date_t = datetime.datetime.strptime(req_date_str,"%Y-%m-%d")
         req_date = req_date_t.replace(tzinfo=datetime.timezone(datetime.timedelta(hours=9)))
         if(req_date.date() == datetime.date.today()):
             queryset = Weather_data.objects.all()
