@@ -1,1 +1,3 @@
-POTEKA_token.py
+.idea
+.env
+/venv/
