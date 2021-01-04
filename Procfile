@@ -1,1 +1,1 @@
-web: PYTHONPATH=`pwd`/.. gunicorn weather_in_ichidai.wsgi --log-file -
+web: PYTHONPATH=`pwd`/.. gunicorn src.weather_in_ichidai.wsgi --log-file -
