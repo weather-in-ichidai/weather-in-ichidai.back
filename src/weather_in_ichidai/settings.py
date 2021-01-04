@@ -58,6 +58,7 @@ ROOT_URLCONF = 'weather_in_ichidai.urls'
 
 CORS_ORIGIN_WHITELIST = [
     'https://weather-in-ichidai.vercel.app',
+    'http://localhost:3000',
 ]
 
 TEMPLATES = [
