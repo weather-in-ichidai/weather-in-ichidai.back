@@ -3,8 +3,8 @@ FROM python:3.7-buster as builder
 
 WORKDIR /opt/app
 
-COPY requirements.lock /opt/app
-RUN pip3 install -r requirements.lock
+COPY requirements.txt /opt/app
+RUN pip3 install -r requirements.txt
 
 # ここからは実行用コンテナの準備
 FROM python:3.7-slim-buster as runner
@@ -28,4 +28,4 @@ COPY src /opt/app/weather_in_ichidai
 USER uwsgiusr
 
 EXPOSE 8000
-CMD ["uwsgi", "--ini", "/opt/app/uwsgi.ini"]
+#CMD ["uwsgi", "--ini", "/opt/app/uwsgi.ini"]

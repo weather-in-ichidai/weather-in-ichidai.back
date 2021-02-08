@@ -1,0 +1,3 @@
+staticfiles
+weather_in_ichidai/local_settings.py
+db.sqlite3

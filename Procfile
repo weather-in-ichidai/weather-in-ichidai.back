@@ -1,0 +1,1 @@
+web: gunicorn --pythonpath src weather_in_ichidai.wsgi --log-file -

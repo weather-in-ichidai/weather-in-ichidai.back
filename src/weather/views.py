@@ -1,3 +1,6 @@
+import sys
+import traceback
+
 from rest_framework import filters
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -11,14 +14,24 @@ import datetime
 
 class WeatherViewSet(APIView):
     def get(self,request):
-        req_date_str = self.request.query_params["date"]
-        req_date_t = datetime.datetime.strptime(self.request.query_params["date"],"%Y-%m-%d")
+        req_date_str = self.request.query_params.get("date")
+        if req_date_str is None:
+            req_date_str = datetime.datetime.now().strftime("%Y-%m-%d")
+        req_date_t = datetime.datetime.strptime(req_date_str,"%Y-%m-%d")
         req_date = req_date_t.replace(tzinfo=datetime.timezone(datetime.timedelta(hours=9)))
         if(req_date.date() == datetime.date.today()):
             queryset = Weather_data.objects.all()
             serializer_class = WeatherSerializer
-            data = WeatherSerializer(Weather_data.objects.all().order_by("date_time").reverse().first()).data
-            return Response(status=200 , data=data)
+            try:
+                data = WeatherSerializer(Weather_data.objects.all().order_by("date_time").reverse().first()).data
+                return Response(status=200, data=data)
+            except :
+                exc_type, exc_value, exc_traceback = sys.exc_info()
+                lines = traceback.format_exception(exc_type, exc_value, exc_traceback)
+                exc = ''.join('' + line for line in lines)
+                return Response(status=500, data=exc)
+
+
         elif(req_date.date() > datetime.date.today()):
             data = {"code":400,"message":"Invalid query parameter of date"}
             return Response(status=400 , data=data)
