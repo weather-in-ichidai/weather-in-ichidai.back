@@ -19,10 +19,7 @@ class Command(BaseCommand):
         url = "http://api.potekanet.com/v1/area/forecast/ja/rectangle"
         payload = {"swPoint":"34.437090,132.411448","nePoint":"34.441312,132.421832","element":"temp"}
         """
-
-        
         headers = {'X-POTEKA-Authorization':poteka_auth}
-
         real_request = requests.get(real_url, params=real_payload,headers=headers)
         forecast_request = requests.get(forecast_url, params=forecast_payload,headers=headers)
 

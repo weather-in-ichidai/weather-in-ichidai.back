@@ -38,8 +38,7 @@ class WeatherViewSet(APIView):
         else:
             queryset = Past_weather_data.objects.all().filter(date=req_date_str)
             serializer_class = PastWeatherSerializer
-            data = ""
-            if len(queryset) != 0:
+            if len(PastWeatherSerializer(queryset, many=True).data) != 0:
                 data = PastWeatherSerializer(queryset, many=True).data
             else:
                 result = management.call_command('get_past_weather_from_POTEKA',date=req_date_str)
